@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.elifelipe.bioinsumoscatalogo.R;
-import com.elifelipe.bioinsumoscatalogo.adapter.PragasAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,8 +25,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void buttonbiologicos(View view){
-        Intent intent = new Intent(this, PragasBiologicos.class);
+        Intent intent = new Intent(this, Biologicos.class);
         startActivity(intent);
     }
+
+    public void buttonInoculantes(View view){
+        Intent intent = new Intent(this, Inoculantes.class);
+        startActivity(intent);
+    }
+
 
 }

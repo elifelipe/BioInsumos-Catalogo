@@ -1,12 +1,17 @@
 package com.elifelipe.bioinsumoscatalogo.adapter;
 
+import android.graphics.Typeface;
 import android.text.Html;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.core.text.HtmlCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.elifelipe.bioinsumoscatalogo.R;
@@ -15,11 +20,12 @@ import com.elifelipe.bioinsumoscatalogo.model.Pragas;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 public class AdapterBiologicos extends RecyclerView.Adapter<AdapterBiologicos.DataViewHolder> {
 
-    private List<Data> dataList = new ArrayList<>();
+    private List<Data> dataList;
 
     public AdapterBiologicos(List<Data> dataList) {
         this.dataList = dataList;
@@ -50,9 +56,9 @@ public class AdapterBiologicos extends RecyclerView.Adapter<AdapterBiologicos.Da
         aprovado = Boolean.parseBoolean(data.aprovadoParaAgriculturaOrganica);
 
         if (aprovado == true){
-            data.aprovadoParaAgriculturaOrganica = "Sim";
+            data.aprovadoParaAgriculturaOrganica = "sim";
         }else {
-            data.aprovadoParaAgriculturaOrganica = "Não";
+            data.aprovadoParaAgriculturaOrganica = "não";
         }
         holder.aprovadoParaAgriculturaOrganicaTextView.setText(data.aprovadoParaAgriculturaOrganica);
         holder.classificacaoToxicologicaTextView.setText(data.classificacaoToxicologica);
@@ -64,17 +70,35 @@ public class AdapterBiologicos extends RecyclerView.Adapter<AdapterBiologicos.Da
         holder.urlTextView.setText(Html.fromHtml(htmlLink));
         holder.urlTextView.setMovementMethod(LinkMovementMethod.getInstance());
 
-        // Exibindo dados da lista de pragas
         StringBuilder pragasText = new StringBuilder();
+        HashSet<String> culturasUnicas = new HashSet<>();
+
         for (Pragas p : data.pragas) {
-            pragasText.append(p.cultura).append(", ");
-            pragasText.append(p.nomeCientifico).append(", ");
+            if (culturasUnicas.contains(p.cultura)) {
+                continue;
+            }
 
-            String arrays[] = p.nomeComum;
+            culturasUnicas.add(p.cultura);
+            pragasText.append("Cultura: ").append(p.cultura).append("\n");
+            pragasText.append("Nome Científico: ").append(p.nomeCientifico).append("\n");
 
-            pragasText.append(Arrays.toString(arrays)).append(", ");
+            String[] nomeComumArray = p.nomeComum;
+            StringBuilder nomeComumText = new StringBuilder();
+            for (int i = 0; i < nomeComumArray.length; i++) {
+                nomeComumText.append(nomeComumArray[i]);
+                if (i < nomeComumArray.length - 1) {
+                    nomeComumText.append(", ");
+                }
+            }
+            pragasText.append("Nomes Comuns: ").append(nomeComumText.toString()).append("\n\n");
         }
-        holder.pragasTextView.setText(pragasText.toString());
+
+        holder.pragasTextView.setText("");
+        SpannableString spannableString = new SpannableString(pragasText.toString());
+        spannableString.setSpan(new StyleSpan(Typeface.BOLD), 0, 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new StyleSpan(Typeface.BOLD), pragasText.indexOf("Nome Científico"), pragasText.indexOf("Nome Científico") + 16, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new StyleSpan(Typeface.BOLD), pragasText.indexOf("Nomes Comuns"), pragasText.indexOf("Nomes Comuns") + 13, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        holder.pragasTextView.setText(spannableString);
     }
 
     @Override
@@ -91,7 +115,6 @@ public class AdapterBiologicos extends RecyclerView.Adapter<AdapterBiologicos.Da
         public TextView aprovadoParaAgriculturaOrganicaTextView;
         public TextView classificacaoToxicologicaTextView;
         public TextView classificacaoAmbientalTextView;
-
         public TextView urlTextView;
         public TextView pragasTextView;
 
