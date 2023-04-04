@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">BioInsumos Catalogo</string>
+    <string name="search_hint">BioInsumos Catalogo</string>
+    <string name="pesquisa">Pesquisa</string>
+    />
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

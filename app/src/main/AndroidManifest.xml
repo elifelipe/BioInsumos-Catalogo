@@ -19,8 +19,8 @@
         <activity
             android:name=".activitys.Inoculantes"
             android:exported="false" />
-        <activity
 
+        <activity
             android:name=".activitys.MainActivity"
             android:exported="true">
             <intent-filter>
@@ -33,7 +33,6 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
     </application>
 
 </manifest>

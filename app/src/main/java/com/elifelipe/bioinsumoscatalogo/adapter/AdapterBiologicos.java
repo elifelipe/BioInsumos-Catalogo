@@ -26,7 +26,6 @@ import java.util.List;
 public class AdapterBiologicos extends RecyclerView.Adapter<AdapterBiologicos.DataViewHolder> {
 
     private List<Data> dataList;
-
     public AdapterBiologicos(List<Data> dataList) {
         this.dataList = dataList;
     }
@@ -44,8 +43,6 @@ public class AdapterBiologicos extends RecyclerView.Adapter<AdapterBiologicos.Da
         holder.marcaComercialTextView.setText(data.marcaComercial);
         holder.titularRegistroTextView.setText(data.titularRegistro);
         holder.ingredienteAtivo.setText(data.ingredienteAtivo);
-
-
 
         String[] array = data.classes;
         String textoSemColchetes = String.join(", ", array);
