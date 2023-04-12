@@ -138,7 +138,7 @@
                 android:layout_height="30dp"
                 android:layout_marginLeft="269dp"
                 android:layout_marginTop="118dp"
-                app:cardBackgroundColor="@color/roxo_view"
+                app:cardBackgroundColor="@color/verde_view"
                 app:cardCornerRadius="8dp"
                 app:cardUseCompatPadding="true">
 

@@ -14,12 +14,17 @@
         android:theme="@style/Theme.BioInsumosCatalogo"
         tools:targetApi="31">
         <activity
+            android:name=".activitys.BioAS"
+            android:exported="false" />
+        <activity
             android:name=".activitys.Biologicos"
+            android:exported="false" />
+        <activity
+            android:name=".activitys.ControleBiologico"
             android:exported="false" />
         <activity
             android:name=".activitys.Inoculantes"
             android:exported="false" />
-
         <activity
             android:name=".activitys.MainActivity"
             android:exported="true">
